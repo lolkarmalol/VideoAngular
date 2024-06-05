@@ -11,11 +11,12 @@ export class LabsComponent {
 
     title = 'todo-app';
     welcom = 'hola';
-    tasks = [
+    tasks = signal([
       'Instalar el angular CLI',
       'Crear Proyecto',
-      'crear Componente'
-    ];
+      'crear Componente',
+      'Crear servicio'
+    ]);
 
     name= signal('Jodier');
     age= '23';
