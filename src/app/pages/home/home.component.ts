@@ -49,9 +49,19 @@ export class HomeComponent {
 
 
   updateTask(index: number){
-    const a = [1,2,3]
-    a[0] = 'ne value '
+    this.tasks.update((tasks)=>{
+      return tasks.map((task, position)=>{
 
+        if(position === index){
+          return {
+            ...task,
+            completed: !task.completed
+          }
+        }
+        return task;
+      })
+    })
+    }
   }
 
-}
+
