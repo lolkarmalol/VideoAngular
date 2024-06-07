@@ -41,12 +41,10 @@ export class HomeComponent {
 
   }
 
-
   deleteTask(index: number){
     this.tasks.update((tasks) => tasks.filter((task, position)=> position !== index ));
 
   }
-
 
   updateTask(index: number){
     this.tasks.update((tasks)=>{
@@ -62,6 +60,11 @@ export class HomeComponent {
       })
     })
     }
-  }
+
+    // getCompletedTaskCount(): number {
+    //   return this.tasks().filter(task => !task.completed).length;
+    // }
+
+    }
 
 

@@ -12,20 +12,20 @@
 <p>Hola soy {{name()}} y mi edad es: {{age}}</p>
 
 <hr />
-<img [src]="person.avatar" alt="">
-<input type="number" [value]="person.age">
+<img [src]="person().avatar" alt="">
+<input type="number" [value]="person().age">
 <button [disabled]="disabled">Clic me</button>
-<p>person: {{person.name}}</p>
+<p>person: {{person().name}}</p>
 
 <hr />
 <button (click)="clickHandler()">clic me</button>
 <button (dblclick)="clickHandler()">double me</button>
 <p>(change)</p>
-<input type="number" [value]="person.age" (change)="changeHandler($event)">
+<input type="number" [value]="person().age" (change)="changeHandler($event)">
 <p>(keydown)</p>
-<input type="text" [value]="person.name" (keydown)="keydowndHandler($event)">
+<input type="text" [value]="person().name" (keydown)="keydowndHandler($event)">
 <p>(keydown shift)</p>
-<input type="text" [value]="person.name" (keydown.shift.t)="clickHandler()">
+<input type="text" [value]="person().name" (keydown.shift.t)="clickHandler()">
 
 <hr />
 <p>Total: {{tasks().length}}</p>
@@ -49,7 +49,26 @@
 <div *ngIf="1 !== 1">
   My Contend
 </div>
-<div *ngIf="name() === 'nicolas'">
-  My Contend
+<div *ngIf="name() === 'Jodier'">
+  Soy Jodier
 </div>
+<input type="number" [value]="person().age" (change)="changeAge($event)">
+
+<!-- <div *ngIf="">
+  Soy mayor de 18 años
+</div> -->
+<ng-template *ngIf="person().name === 'Jodier' && person().age >= 18; else elseBlock">
+  Soy mayor de 18 años
+</ng-template>
+
+<ng-template #elseBlock>
+  Soy Jodier y soy menor de edad
+</ng-template>
+
+<div [ngSwitch]="person().name">
+<p *ngSwitchCase="'Jodier'"> yo soy Jodier</p>
+<p *ngSwitchCase="'mackputh'"> yo soy mackputh</p>
+<p *ngSwitchCase="'pyo'"> yo soy pyo</p>
+</div>
+
 </div>

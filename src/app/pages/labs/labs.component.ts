@@ -18,16 +18,16 @@ export class LabsComponent {
       'Crear servicio'
     ]);
 
-    name= signal('Jodier');
-    age= '23';
+    name= signal('jodier');
+    age= 23;
     disabled=true;
     img = 'https://i.pinimg.com/280x280_RS/ab/8d/84/ab8d84f4ad03d943aeff955efb397e42.jpg';
 
-    person={
+    person=signal({
       name:'Jodier',
-      age: '23',
+      age: 3,
       avatar:'https://i.pinimg.com/280x280_RS/ab/8d/84/ab8d84f4ad03d943aeff955efb397e42.jpg'
-    }
+    });
 
     clickHandler(){
       alert('Hola')
@@ -45,8 +45,15 @@ export class LabsComponent {
 
     }
 
+    changeAge(event: Event){
+      const input = event.target as HTMLInputElement;
+      const newValue = input.value;
+      this.person.update(prevState=>{
+        return{
+        ...prevState,
+        age: parseInt(newValue, 10)
+    }});
+    }
 
-
-
-
+    
   }
