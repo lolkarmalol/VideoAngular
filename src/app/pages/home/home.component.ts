@@ -1,4 +1,5 @@
 import { CommonModule } from '@angular/common';
+import { FormControl, NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Component, signal, input } from '@angular/core';
 
 import { Task} from './../../models/task.model';
@@ -6,7 +7,7 @@ import { Task} from './../../models/task.model';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
@@ -25,10 +26,24 @@ export class HomeComponent {
 
   ]);
 
-    changeHandler(event: Event){
-      const input = event.target as HTMLInputElement;
-      const  newTask = input.value;
-      this.addTask(newTask);
+
+
+  newTaskCtrl = new FormControl('',{
+    nonNullable: true,
+    validators: [
+      Validators.required,
+
+    ]
+});
+
+    changeHandler(){
+      if(this.newTaskCtrl.valid){
+      const value = this.newTaskCtrl.value.trim();
+      if (value){
+      this.addTask(value);
+      this.newTaskCtrl.setValue('');
+      }
+    }
   }
 
   addTask(title: string){

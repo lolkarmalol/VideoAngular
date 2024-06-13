@@ -1,9 +1,11 @@
 import { Component, input, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
+
 @Component({
   selector: 'app-labs',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './labs.component.html',
   styleUrl: './labs.component.css'
 })
@@ -24,10 +26,19 @@ export class LabsComponent {
     img = 'https://i.pinimg.com/280x280_RS/ab/8d/84/ab8d84f4ad03d943aeff955efb397e42.jpg';
 
     person=signal({
-      name:'Jodier',
+      name:'pocoyo',
       age: 3,
       avatar:'https://i.pinimg.com/280x280_RS/ab/8d/84/ab8d84f4ad03d943aeff955efb397e42.jpg'
     });
+
+    colorCtrl = new FormControl();
+
+    constructor() {
+      this.colorCtrl.valueChanges.subscribe(value => {
+        console.log(value);
+      });
+    }
+
 
     clickHandler(){
       alert('Hola')
@@ -54,6 +65,15 @@ export class LabsComponent {
         age: parseInt(newValue, 10)
     }});
     }
+    changeName(event: Event){
+      const input = event.target as HTMLInputElement;
+      const newValue = input.value;
+      this.person.update(prevState=>{
+        return{
+        ...prevState,
+        name: newValue
+    }});
+    }
 
-    
+
   }
